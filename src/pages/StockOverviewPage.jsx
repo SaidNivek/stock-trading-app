@@ -4,7 +4,10 @@ import { StockList } from '../components/StockList'
 
 function StockOverviewPage() {
   return (
-    <div>This is the Stock Overview Page</div>
+    <div>This is the Stock Overview Page
+      <AutoComplete />
+      <StockList />
+    </div>
   )
 }
 
