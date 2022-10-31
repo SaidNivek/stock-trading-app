@@ -20,6 +20,7 @@ export const StockList = () => {
                 // The token after the symbol isn't needed, since we passed it as a aparm in the finnHub axios instance (see apis/finnHub.js)
                 // After the /quote, the object that is passed in has params, which are needed by the fetch request to allow it to match the API docs                
                 // Promise.all accepts a list of promises that it will then send out all at once, to be handled simultaneously
+                // Promise.all needs an array of values to be passed to it, or it own't be able to iterate over it
                 const responses = Promise.all([finnHub.get("/quote?", {
                     params: {
                         symbol: "GOOGL"
