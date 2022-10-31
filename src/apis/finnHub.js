@@ -6,6 +6,6 @@ export default axios.create({
     baseURL: 'https://finnhub.io/api/v1',
     // The params for token will be included with the finnHub axios instance, so we don't have to include it in the fetch request used wherever in the program that we call it
     params: {
-        token: TOKEN,
+        token: TOKEN
     }
 })

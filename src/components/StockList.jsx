@@ -14,29 +14,26 @@ export const StockList = () => {
         let isMounted = true
         // Must be an async function so it can work properly with the await
         const fetchData = async () => {
+            const responses = []
             try {
-                const responses = []
                 // Uses the finnHub axios import to start with the base URL route to make it easier to read/use
                 // The token after the symbol isn't needed, since we passed it as a aparm in the finnHub axios instance (see apis/finnHub.js)
-                // After the /quote, the object that is passed in has params, which are needed by the fetch request to allow it to match the API docs
-                const response1 = await finnHub.get("/quote?", {
+                // After the /quote, the object that is passed in has params, which are needed by the fetch request to allow it to match the API docs                
+                // Promise.all accepts a list of promises that it will then send out all at once, to be handled simultaneously
+                const responses = Promise.all([finnHub.get("/quote?", {
                     params: {
                         symbol: "GOOGL"
                     }
-                })
-                responses.push(response1)
-                const response2 = await finnHub.get("/quote?", {
-                    params: {
-                        symbol: "MSFT"
-                    }
-                })
-                responses.push(response2)
-                const response3 = await finnHub.get("/quote?", {
+                }), finnHub.get("/quote?", {
                     params: {
                         symbol: "AMZN"
                     }
-                })
-                responses.push(response3)
+                }), finnHub.get("/quote?", {
+                    params: {
+                        symbol: "MSFT"
+                    }
+                })])
+
                 console.log(responses)
                 // This will check if the component is mounted. If it is, then we will setStock to the data, if not, then it will skip this and move on
                 if (isMounted) {
