@@ -7,9 +7,6 @@ export const StockList = () => {
     // Will hold the names of the stocks that someone wants to watch and to set those stocks
     const [watchList, setWatchList] = useState(["GOOGL", "MSFT", "AMZ"])
     
-    // Import the key from the .env folder to be used more easily
-    const API_KEY = process.env.REACT_APP_FINNHUB_KEY
-
     useEffect(() => {
         let isMounted = true
         // Must be an async function so it can work properly with the await
@@ -30,17 +27,25 @@ export const StockList = () => {
                     })
                 }))
 
-                console.log(responses)
+                
+                const data = responses.map((response) => {
+                    return {
+                        data: response.data,
+                        symbol: response.config.params.symbol
+                    }
+                    
+                })
                 // This will check if the component is mounted. If it is, then we will setStock to the data, if not, then it will skip this and move on
                 if (isMounted) {
                     // Will take the response.data and put it into the stock variable
-                    setStock(responses)
+                    setStock(data)
                 }
             } catch (err) {
                 console.log(err)
             }
         }
         fetchData()
+        console.log(stock)
         return () => (isMounted = false)
     }, [])
     
