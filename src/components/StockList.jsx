@@ -27,7 +27,7 @@ export const StockList = () => {
                     })
                 }))
 
-                
+                // Map through the responses and pull out the data and the symbol that we need for each stock
                 const data = responses.map((response) => {
                     return {
                         data: response.data,
@@ -45,6 +45,7 @@ export const StockList = () => {
             }
         }
         fetchData()
+        // This will need some sort of loading to ensure that the sock is being represented properly, or else it will have empty data in it and won't render anything and will look incomplete/unprofessional
         console.log(stock)
         return () => (isMounted = false)
     }, [])
