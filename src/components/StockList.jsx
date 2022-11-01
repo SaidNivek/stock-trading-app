@@ -1,5 +1,7 @@
 import {  useState, useEffect } from 'react'
 import finnHub from '../apis/finnHub'
+import  { BsFillCaretDownFill } from "react-icons/bs"
+import  { BsFillCaretUpFill } from "react-icons/bs"
 
 export const StockList = () => {
     
@@ -10,6 +12,10 @@ export const StockList = () => {
     // This function will take in the change of the stock and return success or danger, which will complete the className, turning the text green or red when displayed on the page
     const changeColor = (change) => {
         return change > 0 ? "success" : "danger"
+    }
+
+    const renderIcon = (change) => {
+        return change > 0 ? <BsFillCaretUpFill /> : <BsFillCaretDownFill />
     }
     
     useEffect(() => {
@@ -75,8 +81,8 @@ export const StockList = () => {
                             <tr className="table-row" key={stockData.symbol}>
                                 <th scope="row">{stockData.symbol}</th>
                                 <td>{stockData.data.c}</td>
-                                <td className={`text-${changeColor(stockData.data.d)}`}>{stockData.data.d}</td>
-                                <td className={`text-${changeColor(stockData.data.dp)}`}>{stockData.data.dp}</td>
+                                <td className={`text-${changeColor(stockData.data.d)}`}>{stockData.data.d} {renderIcon(stockData.data.d)}</td>
+                                <td className={`text-${changeColor(stockData.data.dp)}`}>{stockData.data.dp} {renderIcon(stockData.data.dp)}</td>
                                 <td>{stockData.data.h}</td>
                                 <td>{stockData.data.l}</td>
                                 <td>{stockData.data.o}</td>
