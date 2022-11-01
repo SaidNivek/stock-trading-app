@@ -14,6 +14,7 @@ export const StockList = () => {
         return change > 0 ? "success" : "danger"
     }
 
+    // This function will take in the change of the stock and return an up or down arrow, depending on if the stock is positive or negative for that specific value
     const renderIcon = (change) => {
         return change > 0 ? <BsFillCaretUpFill /> : <BsFillCaretDownFill />
     }
