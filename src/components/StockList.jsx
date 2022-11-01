@@ -6,6 +6,11 @@ export const StockList = () => {
     const [stock, setStock] = useState([])
     // Will hold the names of the stocks that someone wants to watch and to set those stocks
     const [watchList, setWatchList] = useState(["GOOGL", "MSFT", "AMZN"])
+
+    // This function will take in the change of the stock and return success or danger, which will complete the className, turning the text green or red when displayed on the page
+    const changeColor = (change) => {
+        return change > 0 ? "success" : "danger"
+    }
     
     useEffect(() => {
         let isMounted = true
@@ -70,8 +75,8 @@ export const StockList = () => {
                             <tr className="table-row" key={stockData.symbol}>
                                 <th scope="row">{stockData.symbol}</th>
                                 <td>{stockData.data.c}</td>
-                                <td>{stockData.data.d}</td>
-                                <td>{stockData.data.dp}</td>
+                                <td className={`text-${changeColor(stockData.data.d)}`}>{stockData.data.d}</td>
+                                <td className={`text-${changeColor(stockData.data.dp)}`}>{stockData.data.dp}</td>
                                 <td>{stockData.data.h}</td>
                                 <td>{stockData.data.l}</td>
                                 <td>{stockData.data.o}</td>
