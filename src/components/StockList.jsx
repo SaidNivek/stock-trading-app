@@ -21,19 +21,14 @@ export const StockList = () => {
                 // After the /quote, the object that is passed in has params, which are needed by the fetch request to allow it to match the API docs                
                 // Promise.all accepts a list of promises that it will then send out all at once, to be handled simultaneously
                 // Promise.all needs an array of values to be passed to it, or it own't be able to iterate over it
-                const responses = Promise.all([finnHub.get("/quote?", {
-                    params: {
-                        symbol: "GOOGL"
-                    }
-                }), finnHub.get("/quote?", {
-                    params: {
-                        symbol: "AMZN"
-                    }
-                }), finnHub.get("/quote?", {
-                    params: {
-                        symbol: "MSFT"
-                    }
-                })])
+                // Can use a map function to take the watchList stock symbols and have them pass into the finnHub.get function
+                const responses = await Promise.all(watchList.map((stock) => {
+                    return finnHub.get("/quote", {
+                        params: {
+                            symbol: stock
+                        }
+                    })
+                }))
 
                 console.log(responses)
                 // This will check if the component is mounted. If it is, then we will setStock to the data, if not, then it will skip this and move on
