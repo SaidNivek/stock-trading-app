@@ -22,7 +22,11 @@ export const AutoComplete = () => {
                 {results.map((result) => {
                     return (
                         // When the user clicks on one of the results, it will pass the symbol of the specific company into the list of watchList, for all stocks
-                        <li onClick={() => addStock(result.symbol)} key={result.symbol} className="dropdown-item">{result.description} ({result.symbol})</li>
+                        <li onClick={() => {
+                            addStock(result.symbol)
+                            setSearch("")
+                        }}
+                         key={result.symbol} className="dropdown-item">{result.description} ({result.symbol})</li>
                     )
                 })}
             </ul>
