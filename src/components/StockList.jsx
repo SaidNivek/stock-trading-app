@@ -1,11 +1,11 @@
-import {  useState, useEffect } from 'react'
+import {  useState, useEffect, useContext } from 'react'
 import finnHub from '../apis/finnHub'
-import  { BsFillCaretDownFill } from "react-icons/bs"
-import  { BsFillCaretUpFill } from "react-icons/bs"
-import { useGlobalContext } from '../context/watchListContext'
+import { BsFillCaretDownFill } from "react-icons/bs"
+import { BsFillCaretUpFill } from "react-icons/bs"
+import { WatchListContext } from '../context/watchListContext'
 
 export const StockList = () => {
-    const {watchList} = useGlobalContext()
+    const {watchList} = useContext(WatchListContext)
     const [stock, setStock] = useState([])    
 
     // This function will take in the change of the stock and return success or danger, which will complete the className, turning the text green or red when displayed on the page

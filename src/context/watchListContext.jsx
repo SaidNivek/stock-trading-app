@@ -11,7 +11,3 @@ export const WatchListContextProvider = (props) => {
         {props.children}
     </WatchListContext.Provider>
 }
-
-export const useGlobalContext = () => {
-    return useContext(WatchListContext)
-}
