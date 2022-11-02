@@ -6,6 +6,19 @@ export const AutoComplete = () => {
     const [search, setSearch] = useState("")
     const [results, setResults] = useState([])
 
+    const renderDropdown = () => {
+        // This will check the search variable, if it has something, then it will return true, otherwise it will return false
+        // If it's true, return the class "show" to show the dropdown, otherwise return null
+        const dropDownClass = search ? "show" : null
+        return (
+            <ul className={`dropdown-menu ${dropDownClass}`}>
+                <li>test 1</li>
+                <li>test 2</li>
+                <li>test 3</li>
+            </ul>
+        )
+    }
+
     // This effect will request from the API data that is being searched for, auto-completing the search input
     useEffect(() => {
         let isMounted = true
@@ -43,11 +56,7 @@ export const AutoComplete = () => {
                 <input style={{backgroundColor: "rgba(145,158,171, 0.04)"}} type="text" id="search"
                 className="form-control" placeholder="Search" autoComplete="off" value={search} onChange={(e) => setSearch(e.target.value)}></input>
                 <label htmlFor="search">Search</label>
-                <ul className="dropdown-menu">
-                    <li>stock 1</li>
-                    <li>stock 2</li>
-                    <li>stock 3</li>
-                </ul>
+                {renderDropdown()}
             </div>
         </div>
     )
