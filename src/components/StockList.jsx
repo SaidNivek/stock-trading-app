@@ -3,10 +3,12 @@ import finnHub from '../apis/finnHub'
 import { BsFillCaretDownFill } from "react-icons/bs"
 import { BsFillCaretUpFill } from "react-icons/bs"
 import { WatchListContext } from '../context/watchListContext'
+import { useNavigate } from 'react-router-dom'
 
 export const StockList = () => {
     const {watchList} = useContext(WatchListContext)
     const [stock, setStock] = useState([])    
+    const navigate = useNavigate()
 
     // This function will take in the change of the stock and return success or danger, which will complete the className, turning the text green or red when displayed on the page
     const changeColor = (change) => {
@@ -60,6 +62,11 @@ export const StockList = () => {
         return () => (isMounted = false)
     }, [watchList])
 
+
+    const handleStockSelect = (symbol) => {
+        navigate(`detail/${symbol}`)
+    }
+
     return (   
         <div>
             <table className="table hover mt-5">
@@ -78,7 +85,7 @@ export const StockList = () => {
                 <tbody>
                     {stock.map((stockData) => {
                         return (
-                            <tr className="table-row" key={stockData.symbol}>
+                            <tr style={{cursor: "pointer"}} onClick={() => handleStockSelect(stockData.symbol)} className="table-row" key={stockData.symbol}>
                                 <th scope="row">{stockData.symbol}</th>
                                 <td>{stockData.data.c}</td>
                                 <td className={`text-${changeColor(stockData.data.d)}`}>{stockData.data.d} {renderIcon(stockData.data.d)}</td>

@@ -4,7 +4,7 @@ import { StockList } from '../components/StockList'
 
 function StockOverviewPage() {
   return (
-    <div>This is the Stock Overview Page
+    <div>
       <AutoComplete />
       <StockList />
     </div>
