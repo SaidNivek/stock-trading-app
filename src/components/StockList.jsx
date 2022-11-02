@@ -6,8 +6,7 @@ import  { BsFillCaretUpFill } from "react-icons/bs"
 export const StockList = () => {
     
     const [stock, setStock] = useState([])
-    // Will hold the names of the stocks that someone wants to watch and to set those stocks
-    const [watchList, setWatchList] = useState(["GOOGL", "MSFT", "AMZN"])
+    
 
     // This function will take in the change of the stock and return success or danger, which will complete the className, turning the text green or red when displayed on the page
     const changeColor = (change) => {
