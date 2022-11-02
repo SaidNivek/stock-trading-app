@@ -11,10 +11,15 @@ export const AutoComplete = () => {
         // If it's true, return the class "show" to show the dropdown, otherwise return null
         const dropDownClass = search ? "show" : null
         return (
-            <ul className={`dropdown-menu ${dropDownClass}`}>
+            <ul style={{
+                height: "500px",
+                overflowY: "scroll",
+                overflowX: "hidden",
+                cursor: "pointer"
+            }} className={`dropdown-menu ${dropDownClass}`}>
                 {results.map((result) => {
                     return (
-                        <li className="dropdown-item">{result.description} ({result.symbol})</li>
+                        <li key={result.symbol} className="dropdown-item">{result.description} ({result.symbol})</li>
                     )
                 })}
             </ul>
