@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import finnHub from "../apis/finnHub"
+import { WatchListContext } from '../context/watchListContext'
 
 export const AutoComplete = () => {
     // This state is used to set the search bar to the value of the search, and update it using setSearch right from the input field (below)
     const [search, setSearch] = useState("")
     const [results, setResults] = useState([])
+    const { addStock } = useContext(WatchListContext)
 
     const renderDropdown = () => {
         // This will check the search variable, if it has something, then it will return true, otherwise it will return false
@@ -19,7 +21,8 @@ export const AutoComplete = () => {
             }} className={`dropdown-menu ${dropDownClass}`}>
                 {results.map((result) => {
                     return (
-                        <li key={result.symbol} className="dropdown-item">{result.description} ({result.symbol})</li>
+                        // When the user clicks on one of the results, it will pass the symbol of the specific company into the list of watchList, for all stocks
+                        <li onClick={() => addStock(result.symbol)} key={result.symbol} className="dropdown-item">{result.description} ({result.symbol})</li>
                     )
                 })}
             </ul>

@@ -58,7 +58,7 @@ export const StockList = () => {
         fetchData()
 
         return () => (isMounted = false)
-    }, [])
+    }, [watchList])
 
     return (   
         <div>
