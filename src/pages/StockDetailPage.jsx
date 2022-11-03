@@ -10,7 +10,7 @@ const formatData = (data) => {
       // need to return the 'el' (which is t) * 1000, because the chart uses milliseconds and the API uses seconds
       x: el * 1000,
       // We need the same index from the c portion of the data, so we use the same index, but iterate on the c list
-      y: data.c[index]
+      y: data.c[index].toFixed(3)
     }
   })
 }
