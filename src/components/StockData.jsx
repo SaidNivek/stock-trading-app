@@ -61,7 +61,7 @@ export const StockData = ({symbol}) => {
                             <span className="fw-bold">Shares Outstanding: {stockData.shareOutstanding}</span>
                         </div>
                         <div>
-                            <span className="fw-bold">URL: <a href={stockData.weburl} target="_blank">{stockData.weburl}</a></span>
+                            <span className="fw-bold">URL: <a href={stockData.weburl} target="_blank" rel="noreferrer">{stockData.weburl}</a></span>
                         </div>
                     </div>                    
                 </div>

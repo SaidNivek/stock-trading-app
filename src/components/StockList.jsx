@@ -24,7 +24,6 @@ export const StockList = () => {
         let isMounted = true
         // Must be an async function so it can work properly with the await
         const fetchData = async () => {
-            const responses = []
             try {
                 // Uses the finnHub axios import to start with the base URL route to make it easier to read/use
                 // The token after the symbol isn't needed, since we passed it as a aparm in the finnHub axios instance (see apis/finnHub.js)

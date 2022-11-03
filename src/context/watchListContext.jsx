@@ -1,11 +1,17 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 
 export const WatchListContext = createContext()
 
 export const WatchListContextProvider = (props) => {
 
     // Will hold the names of the stocks that someone wants to watch and to set those stocks
-    const [watchList, setWatchList] = useState(["GOOGL", "MSFT", "AMZN"])
+    const [watchList, setWatchList] = useState(
+        localStorage.getItem("watchList")?.split(",") || ["GOOGL", "MSFT", "AMZN"]
+    )
+
+    useEffect(() => {
+        localStorage.setItem("watchList", watchList)
+    }, [watchList])
 
     // This function will add a stock to the watchList of stocks, if it is not in the list already
     const addStock = (stock) => {
