@@ -1,10 +1,22 @@
 // Import useParams to be able to get the params from the URL, as defined in App.jsx
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import finnHub from '../apis/finnHub'
+
+const formatData = (data) => {
+  return data.t.map((el, index) => {
+    return {
+      // need to return the 'el' (which is t) * 1000, because the chart uses milliseconds and the API uses seconds
+      x: el * 1000,
+      // We need the same index from the c portion of the data, so we use the same index, but iterate on the c list
+      y: data.c[index]
+    }
+  })
+}
 
 function StockDetailPage() {
 
+  const[chartData, setChartData] = useState()
   // Destructure out the symbol information from the URL, using useParams
   const {symbol} = useParams()
 
@@ -56,10 +68,20 @@ function StockDetailPage() {
           }
         })
       ])
+
       console.log(responses)
+
+      // Use the function defined above to set the data for day, week, and year
+      setChartData({
+        day: formatData(responses[0].data),
+        week: formatData(responses[1].data),
+        year: formatData(responses[2].data)
+      })
+
     } catch (error) {
       console.log(error)
     }
+
 
       
     } // end fetchData code block definition
