@@ -23,7 +23,11 @@ function StockDetailPage() {
       } else {
         oneDay = currentTime - 24 * 60 * 60
       }
-      const response = await finnHub.get("/stock/candle", {
+      const oneWeek = currentTime - 7*24*60*60
+      const oneYear = currentTime - 365*24*60*60
+
+      // This will get data for one day, with datapoints every 30 minutes (resolution)
+      const responseDay = await finnHub.get("/stock/candle", {
         params: {
           symbol,
           from: oneDay, 
@@ -31,7 +35,27 @@ function StockDetailPage() {
           resolution: 30
         }
       })
-      console.log(response)
+      // This will get data for one Week, with data points every hour (resolution)
+      const responseWeek = await finnHub.get("/stock/candle", {
+        params: {
+          symbol,
+          from: oneWeek, 
+          to: currentTime,
+          resolution: 60
+        }
+      })
+      // This will get data for one Year, with data points every week (resolution)
+      const responseYear = await finnHub.get("/stock/candle", {
+        params: {
+          symbol,
+          from: oneYear, 
+          to: currentTime,
+          resolution: "W"
+        }
+      })
+      console.log(responseDay)
+      console.log(responseWeek)
+      console.log(responseYear)
     }
     fetchData()
   }, [])
