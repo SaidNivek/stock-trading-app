@@ -71,8 +71,6 @@ function StockDetailPage() {
         })
       ])
 
-      console.log(responses)
-
       // Use the function defined above to set the data for day, week, and year
       setChartData({
         day: formatData(responses[0].data),
