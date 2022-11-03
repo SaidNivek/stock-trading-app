@@ -6,7 +6,7 @@ import { WatchListContext } from '../context/watchListContext'
 import { useNavigate } from 'react-router-dom'
 
 export const StockList = () => {
-    const {watchList} = useContext(WatchListContext)
+    const { watchList, deleteStock } = useContext(WatchListContext)
     const [stock, setStock] = useState([])    
     const navigate = useNavigate()
 
@@ -95,7 +95,11 @@ export const StockList = () => {
                                 <td>{stockData.data.l}</td>
                                 <td>{stockData.data.o}</td>
                                 <td>{stockData.data.pc}</td>
-                                <td><button className="btn btn-danger btn-sm delete-button">Delete</button></td>
+                                <td><button onClick={(e) => {
+                                    // This e.stopPropogation() is needed to prevent react from bubbling up to the function that is called from the table-row, which would navigate to the detail page and NOT remove the stock from the watchList. With this, it stops moving up and does the most recent function/event.
+                                    e.stopPropagation()
+                                    deleteStock(stockData.symbol)
+                                    }} className="btn btn-danger btn-sm delete-button">Delete</button></td>
                             </tr>
                         )
                     })}
