@@ -7,7 +7,26 @@ export const StockChart = ({chartData, symbol}) => {
     const [dateFormat, setDateFormat] = useState("24h")
     // Deconstruct the chart data that is passed into the component 
     const { day, week, year } = chartData
+
+    // This function chooses the time format, to display the proper information to the page
+    const chooseTimeFormat = () => {
+        switch(dateFormat) {
+            case "24h":
+                return day
+            case "7d":
+                return week
+            case "1y":
+                return year
+            default:
+                return day
+        }
+    }
+
+    // This is determining whether the change in stock price has gone up or down for the selected period of time (1 day, 1 week or 1 year) by subtracting the value of the last item in the array with the 1st item in the array
+    const color = chooseTimeFormat()[chooseTimeFormat().length - 1].y - chooseTimeFormat()[0].y > 0 ? "#26C281" : "#ED3419"
+
     const options = {
+        colors: [color],
         title: {
             text: symbol,
             align: "center",
@@ -29,19 +48,6 @@ export const StockChart = ({chartData, symbol}) => {
             x: {
                 format: "MMM dd HH:MM"
             }
-        }
-    }
-
-    const chooseTimeFormat = () => {
-        switch(dateFormat) {
-            case "24h":
-                return day
-            case "7d":
-                return week
-            case "1y":
-                return year
-            default:
-                return day
         }
     }
 
