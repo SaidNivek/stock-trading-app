@@ -21,6 +21,11 @@ export const StockChart = ({chartData, symbol}) => {
             labels: {
                 datetimeUTC: false
             }
+        },
+        tooltip: {
+            x: {
+                format: "MMM dd HH:MM"
+            }
         }
     }
 
