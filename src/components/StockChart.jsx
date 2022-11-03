@@ -25,6 +25,8 @@ export const StockChart = ({chartData, symbol}) => {
     // This is determining whether the change in stock price has gone up or down for the selected period of time (1 day, 1 week or 1 year) by subtracting the value of the last item in the array with the 1st item in the array
     const color = chooseTimeFormat()[chooseTimeFormat().length - 1].y - chooseTimeFormat()[0].y > 0 ? "#26C281" : "#ED3419"
 
+    // This is needed by Apex Charts to run properly, giving it the options and properties it needs to display things properly
+    // https://apexcharts.com/docs/installation/
     const options = {
         colors: [color],
         title: {

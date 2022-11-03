@@ -80,6 +80,7 @@ export const StockList = () => {
                         <th scope="col">Low</th>
                         <th scope="col">Open</th>
                         <th scope="col">Close</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,6 +95,7 @@ export const StockList = () => {
                                 <td>{stockData.data.l}</td>
                                 <td>{stockData.data.o}</td>
                                 <td>{stockData.data.pc}</td>
+                                <td><button className="btn btn-danger btn-sm delete-button">Delete</button></td>
                             </tr>
                         )
                     })}
