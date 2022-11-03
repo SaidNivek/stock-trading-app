@@ -2,6 +2,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import finnHub from '../apis/finnHub'
+import { StockChart } from '../components/StockChart'
 
 const formatData = (data) => {
   return data.t.map((el, index) => {
@@ -81,15 +82,21 @@ function StockDetailPage() {
     } catch (error) {
       console.log(error)
     }
-
-
       
     } // end fetchData code block definition
     fetchData()
-  }, [])
+  }, [symbol])
 
   return (
-    <div>This is the stock detail page {symbol}</div>
+    // If there is data in chartData, then it will render, using the if statement and the && check
+    <div>{chartData && (
+      <div>
+        <StockChart 
+          chartData = {chartData}
+          symbol = {symbol}
+        />
+      </div>
+    )}</div>
   )
 }
 
