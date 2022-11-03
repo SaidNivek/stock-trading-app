@@ -26,37 +26,43 @@ function StockDetailPage() {
       const oneWeek = currentTime - 7*24*60*60
       const oneYear = currentTime - 365*24*60*60
 
-      // This will get data for one day, with datapoints every 30 minutes (resolution)
-      const responseDay = await finnHub.get("/stock/candle", {
-        params: {
-          symbol,
-          from: oneDay, 
-          to: currentTime,
-          resolution: 30
-        }
-      })
-      // This will get data for one Week, with data points every hour (resolution)
-      const responseWeek = await finnHub.get("/stock/candle", {
-        params: {
-          symbol,
-          from: oneWeek, 
-          to: currentTime,
-          resolution: 60
-        }
-      })
-      // This will get data for one Year, with data points every week (resolution)
-      const responseYear = await finnHub.get("/stock/candle", {
-        params: {
-          symbol,
-          from: oneYear, 
-          to: currentTime,
-          resolution: "W"
-        }
-      })
-      console.log(responseDay)
-      console.log(responseWeek)
-      console.log(responseYear)
+      try {
+        const responses = await Promise.all([
+          // This will get data for one day, with datapoints every 30 minutes (resolution)
+          finnHub.get("/stock/candle", {
+            params: {
+              symbol,
+              from: oneDay, 
+              to: currentTime,
+              resolution: 30
+            }
+        }),
+        // This will get data for one Week, with data points every hour (resolution)
+        finnHub.get("/stock/candle", {
+          params: {
+            symbol,
+            from: oneWeek, 
+            to: currentTime,
+            resolution: 60
+          }
+        }),
+        // This will get data for one Year, with data points every week (resolution)
+        finnHub.get("/stock/candle", {
+          params: {
+            symbol,
+            from: oneYear, 
+            to: currentTime,
+            resolution: "W"
+          }
+        })
+      ])
+      console.log(responses)
+    } catch (error) {
+      console.log(error)
     }
+
+      
+    } // end fetchData code block definition
     fetchData()
   }, [])
 
