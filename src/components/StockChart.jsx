@@ -50,6 +50,17 @@ export const StockChart = ({chartData, symbol}) => {
         data: chooseTimeFormat()
     }]
 
+    // This function will apply the proper classes to the buttons which select that date format
+    // If the dateFormat === the button selected, then it will add the primary button, so it will be highlighted
+    const renderButtonSelect = button => {
+        const classes = "btn m-1 "
+        if (button === dateFormat) {
+            return classes + "btn-primary"
+        } else {
+            return classes + "btn-outline-primary"
+        }
+    }
+
     return (
         <div className="mt-5 p-4 shadow-sm bg-white">
             <Chart 
@@ -59,9 +70,9 @@ export const StockChart = ({chartData, symbol}) => {
                 width="100%"
             />
             <div>
-                <button onClick={() => setDateFormat("24h")}>1 day</button>
-                <button onClick={() => setDateFormat("7d")}>7 days</button>
-                <button onClick={() => setDateFormat("1y")}>1 year</button>
+                <button className={renderButtonSelect("24h")} onClick={() => setDateFormat("24h")}>1 day</button>
+                <button className={renderButtonSelect("7d")} onClick={() => setDateFormat("7d")}>1 week</button>
+                <button className={renderButtonSelect("1y")} onClick={() => setDateFormat("1y")}>1 year</button>
             </div>
         </div>
     )
